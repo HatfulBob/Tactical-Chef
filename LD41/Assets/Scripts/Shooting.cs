@@ -25,7 +25,7 @@ public class Shooting : MonoBehaviour {
 
     void FireShot()
     {  
-        if(Physics.Raycast(transform.position, Quaternion., out hit, Mathf.Infinity))
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
             Debug.Log("Hit: " + hit.collider.gameObject.name);
