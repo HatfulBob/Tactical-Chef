@@ -77,6 +77,10 @@ public class GameController : MonoBehaviour
                 if (pot.TomatosAdded >= tomatosNeeded && pot.OnionsAdded >= onionsNeeded)
                     currentObjective++;
                 break;
+            case 5:
+                if (pot.KnockedOver)
+                    currentObjective++;
+                break;
 
         }
         if (currentObjective > objectives.Length)

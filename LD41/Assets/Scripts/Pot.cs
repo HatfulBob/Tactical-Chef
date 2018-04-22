@@ -14,6 +14,8 @@ public class Pot : MonoBehaviour
     private float maxTimer = 3f;//3 seconds
     private float health = 100;
     private bool broken = false;
+    private bool knockedOver = false;
+    private GameController gc;
 
     public float Temperature
     {
@@ -21,7 +23,7 @@ public class Pot : MonoBehaviour
         {
             return temperature;
         }
-        
+
     }
 
     public int PastaAdded
@@ -88,11 +90,25 @@ public class Pot : MonoBehaviour
             broken = value;
         }
     }
-     
+
+    public bool KnockedOver
+    {
+        get
+        {
+            return knockedOver;
+        }
+
+        set
+        {
+            knockedOver = value;
+        }
+    }
+
 
     // Use this for initialization
     void Start()
     {
+        gc = FindObjectOfType<GameController>();
         timer = maxTimer;
     }
 
@@ -115,5 +131,31 @@ public class Pot : MonoBehaviour
         }
 
         if (health < 0 && !broken) broken = true;
+    }
+
+    public void KnockOver()
+    {
+        if (!knockedOver)
+            GetComponent<Animation>().Play();
+        knockedOver = true;
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name.Contains("Bullet")&&gc.CurrentObjective==3)
+        {
+            health -= 10;
+            Destroy(collision.gameObject);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.name.Contains("Flame"))
+        {
+            Debug.Log("Ouch oof owie");
+            heatUp(0.5f);
+            Destroy(other.gameObject);
+        }
     }
 }

@@ -13,7 +13,10 @@ public class Player : MonoBehaviour
     public GameObject pastaSpawn;//where the pasta flies out of
     public GameObject fire;//what the flamwerffer werfs
     public GameObject fireSpawn;//the nozzle of the flamwerfer
+    public GameObject bullet;
+    public GameObject bulletSpawn;
 
+    private GameController gc;
     private int currentWeapon = 0;
     [SerializeField] private int pastaAmmo = 0;
 
@@ -30,6 +33,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        gc = FindObjectOfType<GameController>();
         //spawn 1st weapon
         weapons[0].gameObject.SetActive(true);
         weapons[1].gameObject.SetActive(false);
@@ -47,8 +51,7 @@ public class Player : MonoBehaviour
         {
             switch (currentWeapon)
             {
-                case 0: weapons[0].GetComponent<Animation>().Play(); GetComponent<Shooting>().FireShot(); break;
-                case 1: GetComponent<Shooting>().FireShot(); break;
+                case 0: weapons[0].GetComponent<Animation>().Play(); FireShot(); break;
                 case 2: TossPasta(); break;
             }
         }
@@ -127,12 +130,25 @@ public class Player : MonoBehaviour
             projectile, pastaSpawn.transform.position, pastaSpawn.transform.rotation);
 
         // Add velocity to the bullet
-        pasta.GetComponent<Rigidbody>().velocity = pasta.transform.forward * 80;
+        pasta.GetComponent<Rigidbody>().velocity = pasta.transform.up * 80;
 
         // Destroy the bullet after 4 seconds
         //Destroy(pasta, 4.0f);
         pastaAmmo--;
     }
+
+    void FireShot()
+    {
+        var shot = (GameObject)Instantiate(
+            bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
+
+        // Add velocity to the bullet
+        shot.GetComponent<Rigidbody>().velocity = shot.transform.forward * 8;
+
+        // Destroy the bullet after 2 seconds
+        Destroy(shot, 2.0f);
+    }
+
     void FireFlame()
     {
         // Create the Bullet from the Bullet Prefab
@@ -140,8 +156,31 @@ public class Player : MonoBehaviour
             fire, fireSpawn.transform.position, fireSpawn.transform.rotation);
 
         // Add velocity to the bullet
-        flame.GetComponent<Rigidbody>().velocity = flame.transform.forward * 6;
+        flame.GetComponent<Rigidbody>().velocity = flame.transform.forward * 9;
 
-        Destroy(flame, 1.0f);
+        Destroy(flame, .4f);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Handle") && gc.CurrentObjective == 5)
+        {
+            FindObjectOfType<Pot>().KnockOver();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name.Contains("Pick"))
+        {
+            pastaAmmo = 50;
+
+            //spawn 3rd weapon
+            weapons[0].gameObject.SetActive(false);
+            weapons[1].gameObject.SetActive(false);
+            weapons[2].gameObject.SetActive(true);
+            currentWeapon = 2;
+            ammoCounter.text = pastaAmmo + "/50";
+        }
     }
 }

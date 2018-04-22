@@ -6,7 +6,6 @@ public class Weapon : MonoBehaviour {
     private int weaponDamage = 20;
     private float timeBetweenShot = 0.1f;
     public bool animating = false;
-    private Animator fire;
 
     public int WeaponDamage
     {
@@ -26,8 +25,6 @@ public class Weapon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        fire = GetComponent<Animator>();
-        fire.enabled = false;
 	}
 
     // Update is called once per frame
