@@ -11,8 +11,12 @@ public class Player : MonoBehaviour
     public Text ammoCounter;
     public GameObject projectile;//the pasta javelin
     public GameObject pastaSpawn;//where the pasta flies out of
-    private int currentWeapon = 2;
-    [SerializeField]  private int pastaAmmo = 0;
+    public GameObject fire;//what the flamwerffer werfs
+    public GameObject fireSpawn;//the nozzle of the flamwerfer
+
+    private int currentWeapon = 0;
+    [SerializeField] private int pastaAmmo = 0;
+
 
     public int CurrentWeapon
     {
@@ -20,13 +24,18 @@ public class Player : MonoBehaviour
         {
             return currentWeapon;
         }
-        
+
     }
 
     // Use this for initialization
     void Start()
     {
-
+        //spawn 1st weapon
+        weapons[0].gameObject.SetActive(true);
+        weapons[1].gameObject.SetActive(false);
+        weapons[2].gameObject.SetActive(false);
+        currentWeapon = 0;
+        ammoCounter.text = "";
     }
 
 
@@ -36,11 +45,17 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            switch (currentWeapon) {
-                case 0:
+            switch (currentWeapon)
+            {
+                case 0: weapons[0].GetComponent<Animation>().Play(); GetComponent<Shooting>().FireShot(); break;
                 case 1: GetComponent<Shooting>().FireShot(); break;
-                case 2: TossPasta();break;
+                case 2: TossPasta(); break;
             }
+        }
+        if (Input.GetButton("Fire1") && currentWeapon == 1)
+        {
+            //werf flames
+            FireFlame();
         }
 
 
@@ -81,7 +96,7 @@ public class Player : MonoBehaviour
                     weapons[1].gameObject.SetActive(false);
                     weapons[2].gameObject.SetActive(true);
                     currentWeapon = 2;
-                    ammoCounter.text = pastaAmmo+"/50";
+                    ammoCounter.text = pastaAmmo + "/50";
                 }
             }
         }
@@ -90,8 +105,9 @@ public class Player : MonoBehaviour
         {
             if (pastaAmmo > 0)
             {
-                ammoCounter.text = pastaAmmo+"/50";
-            } else
+                ammoCounter.text = pastaAmmo + "/50";
+            }
+            else
             {
                 //change to first weapon
 
@@ -107,15 +123,25 @@ public class Player : MonoBehaviour
 
     void TossPasta()
     {
-        // Create the Bullet from the Bullet Prefab
         var pasta = (GameObject)Instantiate(
             projectile, pastaSpawn.transform.position, pastaSpawn.transform.rotation);
 
         // Add velocity to the bullet
-        pasta.GetComponent<Rigidbody>().velocity = pasta.transform.forward * 2;
+        pasta.GetComponent<Rigidbody>().velocity = pasta.transform.forward * 80;
 
         // Destroy the bullet after 4 seconds
         //Destroy(pasta, 4.0f);
         pastaAmmo--;
+    }
+    void FireFlame()
+    {
+        // Create the Bullet from the Bullet Prefab
+        var flame = (GameObject)Instantiate(
+            fire, fireSpawn.transform.position, fireSpawn.transform.rotation);
+
+        // Add velocity to the bullet
+        flame.GetComponent<Rigidbody>().velocity = flame.transform.forward * 6;
+
+        Destroy(flame, 1.0f);
     }
 }
