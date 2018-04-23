@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec5eec70d03bcbc4c97c60533e4ecdf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MovePower: 5
+  m_MovePower: 10
   m_UseTorque: 0
   m_MaxAngularVelocity: 25
   carcass: {fileID: 1788880161217356, guid: 4758a55a76826db408c231b9d296fa9d, type: 2}

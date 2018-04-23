@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
             switch (currentWeapon)
             {
                 case 0: weapons[0].GetComponent<Animation>().Play();
-                    if(!weapons[0].GetComponent<AudioSource>().isPlaying)weapons[0].GetComponent<AudioSource>().Play();
+                    weapons[0].GetComponent<AudioSource>().Play();
                     FireShot(); break;
                 case 2: TossPasta(); break;
             }
@@ -60,7 +60,12 @@ public class Player : MonoBehaviour
         if (Input.GetButton("Fire1") && currentWeapon == 1)
         {
             //werf flames
+            if(!weapons[1].GetComponent<AudioSource>().isPlaying)
+            weapons[1].GetComponent<AudioSource>().Play();
             FireFlame();
+        } else
+        {
+            weapons[1].GetComponent<AudioSource>().Stop();
         }
 
 
