@@ -17,6 +17,7 @@ public class Pot : MonoBehaviour
     private bool knockedOver = false;
     private GameController gc;
 
+
     public float Temperature
     {
         get
@@ -140,21 +141,19 @@ public class Pot : MonoBehaviour
         knockedOver = true;
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name.Contains("Bullet")&&gc.CurrentObjective==3)
-        {
-            health -= 10;
-            Destroy(collision.gameObject);
-        }
-    }
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.name.Contains("Flame"))
+        if (other.gameObject.name.Contains("Fire"))
         {
-            Debug.Log("Ouch oof owie");
-            heatUp(0.5f);
+            if (temperature <= 120)
+                heatUp(1f);
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.name.Contains("Bullet") && gc.CurrentObjective == 3)
+        {
+            Debug.Log("Hit!");
+            health -= 10;
             Destroy(other.gameObject);
         }
     }

@@ -9,47 +9,46 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1547679759688284}
+  m_RootGameObject: {fileID: 1788880161217356}
   m_IsPrefabParent: 1
---- !u!1 &1547679759688284
+--- !u!1 &1788880161217356
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4787228077901104}
-  - component: {fileID: 33710513268013058}
-  - component: {fileID: 135891077384499210}
-  - component: {fileID: 23891195993738234}
-  - component: {fileID: 54394320500754514}
-  - component: {fileID: 114703632924638954}
+  - component: {fileID: 4743646012453976}
+  - component: {fileID: 33626883058244314}
+  - component: {fileID: 23927634405918936}
+  - component: {fileID: 54319077289390638}
+  - component: {fileID: 65690457234016122}
   m_Layer: 0
-  m_Name: Tomato
-  m_TagString: Food
+  m_Name: Squashed Onion
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4787228077901104
+--- !u!4 &4743646012453976
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1547679759688284}
+  m_GameObject: {fileID: 1788880161217356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 10, y: 1.7931439, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23891195993738234
+--- !u!23 &23927634405918936
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1547679759688284}
+  m_GameObject: {fileID: 1788880161217356}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -58,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b7efe67198b994a4090a7f21910d8d29, type: 2}
+  - {fileID: 2100000, guid: 2e63129f0e1d8834e9af2cbc900add58, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,19 +77,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33710513268013058
+--- !u!33 &33626883058244314
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1547679759688284}
+  m_GameObject: {fileID: 1788880161217356}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54394320500754514
+--- !u!54 &54319077289390638
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1547679759688284}
+  m_GameObject: {fileID: 1788880161217356}
   serializedVersion: 2
   m_Mass: 20
   m_Drag: 0
@@ -100,30 +99,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114703632924638954
-MonoBehaviour:
+--- !u!65 &65690457234016122
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1547679759688284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec5eec70d03bcbc4c97c60533e4ecdf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovePower: 5
-  m_UseTorque: 0
-  m_MaxAngularVelocity: 25
-  carcass: {fileID: 1745070501251554, guid: c7c72894a14054e4c8b5dbca66786393, type: 2}
---- !u!135 &135891077384499210
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1547679759688284}
+  m_GameObject: {fileID: 1788880161217356}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 0.87, y: 0.79, z: 0.78}
   m_Center: {x: 0, y: 0, z: 0}

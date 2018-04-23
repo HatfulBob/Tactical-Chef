@@ -65,7 +65,7 @@ public class Shooting : MonoBehaviour
         lastShotTime = watch.ElapsedMilliseconds;
         if (lastShotTime + gameObject.GetComponent<Weapon>().TimeBetweenShot >= watch.ElapsedMilliseconds)
         {
-            obj.GetComponent<Entity>().takeDmg(gameObject.GetComponent<Weapon>().WeaponDamage);
+            obj.GetComponent<Entity>().takeDmg(true);
         }
     }
 }

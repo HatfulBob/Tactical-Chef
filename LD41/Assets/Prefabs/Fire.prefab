@@ -38,8 +38,9 @@ GameObject:
   - component: {fileID: 4887957234371962}
   - component: {fileID: 135680771290266546}
   - component: {fileID: 54310857847086078}
+  - component: {fileID: 33165138537273444}
   m_Layer: 0
-  m_Name: Flame
+  m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,6 +73,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &33165138537273444
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1948006775322032}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54310857847086078
 Rigidbody:
   m_ObjectHideFlags: 1

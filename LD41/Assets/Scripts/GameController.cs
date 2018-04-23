@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
 {
 
     public Text objectiveText;
+    public Text temperatureText;
     public string[] objectives;
     public Pot pot;//for getting count of pasta/tomatos/onions
     public int pastaNeeded = 20, tomatosNeeded = 10, onionsNeeded = 5;
@@ -21,7 +22,7 @@ public class GameController : MonoBehaviour
 
     //pasta boiling timer
     private float timer;
-    private float maxTimer = 2 * 60f;//2 minutes
+    private float maxTimer = 2; //* 60f;//2 minutes CHANGE THIS
 
     public int CurrentObjective
     {
@@ -29,14 +30,14 @@ public class GameController : MonoBehaviour
         {
             return currentObjective;
         }
-        
+
     }
 
     // Use this for initialization
     void Start()
     {
         secondObjective = objectives[1];
-        fourthObjective = objectives[3];
+        fourthObjective = objectives[4];
         timer = maxTimer;
 
     }
@@ -65,15 +66,16 @@ public class GameController : MonoBehaviour
                 }
                 else
                 {
-                    timer -= Time.deltaTime;
+                    if (pot.Temperature >= pot.BoilingTemp)
+                        timer -= Time.deltaTime;
                 }
                 break;
             case 3:
-                if(pot.Broken)
+                if (pot.Broken)
                     currentObjective++;
                 break;
             case 4:
-                objectiveText.text = fourthObjective + " (" + pot.TomatosAdded + "/" + tomatosNeeded + "," + pot.OnionsAdded + "/" + onionsNeeded+")";
+                objectiveText.text = fourthObjective + " (" + pot.TomatosAdded + "/" + tomatosNeeded + "," + pot.OnionsAdded + "/" + onionsNeeded + ")";
                 if (pot.TomatosAdded >= tomatosNeeded && pot.OnionsAdded >= onionsNeeded)
                     currentObjective++;
                 break;
@@ -95,5 +97,12 @@ public class GameController : MonoBehaviour
         {
             objectiveText.text = objectives[currentObjective];
         }
+
+        temperatureText.text = pot.Temperature + "°C";
+        if (pot.Temperature < 100)
+        {
+            temperatureText.color = Color.red;
+        }
+        else temperatureText.color = Color.green;
     }
 }

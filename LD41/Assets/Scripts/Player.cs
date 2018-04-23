@@ -99,7 +99,6 @@ public class Player : MonoBehaviour
                     weapons[1].gameObject.SetActive(false);
                     weapons[2].gameObject.SetActive(true);
                     currentWeapon = 2;
-                    ammoCounter.text = pastaAmmo + "/50";
                 }
             }
         }
@@ -130,7 +129,7 @@ public class Player : MonoBehaviour
             projectile, pastaSpawn.transform.position, pastaSpawn.transform.rotation);
 
         // Add velocity to the bullet
-        pasta.GetComponent<Rigidbody>().velocity = pasta.transform.up * 80;
+        pasta.GetComponent<Rigidbody>().velocity = pasta.transform.up * 90;
 
         // Destroy the bullet after 4 seconds
         //Destroy(pasta, 4.0f);
@@ -139,11 +138,10 @@ public class Player : MonoBehaviour
 
     void FireShot()
     {
-        var shot = (GameObject)Instantiate(
-            bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
+        var shot = (GameObject)Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
 
         // Add velocity to the bullet
-        shot.GetComponent<Rigidbody>().velocity = shot.transform.forward * 8;
+        shot.GetComponent<Rigidbody>().velocity = shot.transform.forward * 90;
 
         // Destroy the bullet after 2 seconds
         Destroy(shot, 2.0f);
@@ -156,7 +154,7 @@ public class Player : MonoBehaviour
             fire, fireSpawn.transform.position, fireSpawn.transform.rotation);
 
         // Add velocity to the bullet
-        flame.GetComponent<Rigidbody>().velocity = flame.transform.forward * 9;
+        flame.GetComponent<Rigidbody>().velocity = flame.transform.forward * 25;
 
         Destroy(flame, .4f);
     }
@@ -166,6 +164,20 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Handle") && gc.CurrentObjective == 5)
         {
             FindObjectOfType<Pot>().KnockOver();
+        }
+
+        if (collision.gameObject.name.Contains("Squash"))
+        {
+            if (collision.gameObject.name.Contains("Tomato"))
+            {
+                FindObjectOfType<Pot>().TomatosAdded++;
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                FindObjectOfType<Pot>().OnionsAdded++;
+                Destroy(collision.gameObject);
+            }
         }
     }
 
@@ -182,5 +194,6 @@ public class Player : MonoBehaviour
             currentWeapon = 2;
             ammoCounter.text = pastaAmmo + "/50";
         }
+
     }
 }
