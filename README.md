@@ -12,3 +12,7 @@ https://www.youtube.com/watch?v=UdkUNtS6WaQ
 https://www.youtube.com/watch?v=rzhjY4ETXdA
 
 All rights reserved
+
+## How to play
+The game is hosted on itch.io under the following link:
+https://lazlo319.itch.io/tactical-chef
