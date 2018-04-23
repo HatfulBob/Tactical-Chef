@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pot : MonoBehaviour
 {
@@ -133,7 +134,9 @@ public class Pot : MonoBehaviour
         }
         else
         {
-            temperature -= coolingTemp;
+            if (temperature > 0)
+                temperature -= coolingTemp;
+            else temperature = 0;
             timer = maxTimer;
         }
 
@@ -149,7 +152,6 @@ public class Pot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.gameObject.name.Contains("Fire"))
         {
             if (temperature <= 120)
