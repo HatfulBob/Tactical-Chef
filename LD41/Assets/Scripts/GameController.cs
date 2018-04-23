@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     public int pastaNeeded = 20, tomatosNeeded = 10, onionsNeeded = 5;
     public GameObject player;
     public Camera victoryCamera;
+    public GameObject pasta;
 
     private string secondObjective;//Save the second objective cause you're gonna have to keep changing it (for the pasta counter)
     private string fourthObjective;//Save the fourth objective cause you're gonna have to keep changing it (for the tomato/onion counters)
@@ -90,6 +91,13 @@ public class GameController : MonoBehaviour
             //the game is over
             victoryCamera.gameObject.SetActive(true);
             player.SetActive(false);
+            pasta.SetActive(true);
+            var ui = FindObjectOfType<Canvas>().GetComponentsInChildren<Text>();
+            for(int i = 1;i < ui.Length; i++)
+            {
+                ui[i].text = "";
+            }
+            ui[0].enabled = true;
 
         }
 
