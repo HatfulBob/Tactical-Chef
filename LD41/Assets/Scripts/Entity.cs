@@ -45,7 +45,7 @@ public class Entity : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        gc = FindObjectOfType<GameController>();
+           gc = FindObjectOfType<GameController>();
         health = maxHealth;
         speed = Random.Range(5, 100);
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -63,12 +63,13 @@ public class Entity : MonoBehaviour
 
     public void takeDmg(bool leaveCorpse)
     {
+        FindObjectOfType<Spawner>().GetComponent<AudioSource>().Play();
         if (leaveCorpse&&gc.CurrentObjective==4)
         {
             Instantiate(carcass,transform.position,Quaternion.identity);
         }
-            //play death animation
-            Destroy(gameObject);
+        //play death animation
+        Destroy(gameObject);
     }
 
     public void Move(Vector3 moveDirection)

@@ -9,7 +9,9 @@ public class Pot : MonoBehaviour
     [SerializeField] private float temperature = 20f;
     [SerializeField] private float boilingTemp = 100f;//temperature the pasta cooks
     [SerializeField] private float coolingTemp = 0.5f;//every so often, how much heat does the pot lose
+    public GameObject emptyingPot;
 
+    private List<GameObject> drips;//all the holes shot in the pot
     private int pastaAdded = 0, tomatosAdded = 0, onionsAdded = 0;
     private float timer;
     private float maxTimer = 3f;//3 seconds
@@ -19,6 +21,8 @@ public class Pot : MonoBehaviour
     private GameController gc;
     private AudioSource audio;
 
+    private bool timerStart = false;
+    private float finalTime = 2;
 
     public float Temperature
     {
@@ -124,10 +128,21 @@ public class Pot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (timerStart)
+        {
+            if (finalTime > 0)
+            {
+                finalTime -= Time.deltaTime;
+            } else
+            {
+                knockedOver = true;
+            }
+        }
         if (!audio.isPlaying && temperature >= boilingTemp)
         {
             audio.Play();
         }
+
         if (timer > 0)
         {
             timer -= Time.deltaTime;
@@ -141,13 +156,13 @@ public class Pot : MonoBehaviour
         }
 
         if (health < 0 && !broken) broken = true;
+        
     }
-
     public void KnockOver()
     {
         if (!knockedOver)
             GetComponent<Animation>().Play();
-        knockedOver = true;
+        timerStart = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -161,6 +176,7 @@ public class Pot : MonoBehaviour
         else if (other.gameObject.name.Contains("Bullet") && gc.CurrentObjective == 3)
         {
             Debug.Log("Hit!");
+            other.gameObject.GetComponent<AudioSource>().Play();
             health -= 10;
             Destroy(other.gameObject);
         }

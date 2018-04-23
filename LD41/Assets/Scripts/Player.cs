@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Globalization;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -48,6 +51,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetButtonDown("Fire1"))
         {
             switch (currentWeapon)
@@ -191,6 +195,24 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Handle") && gc.CurrentObjective == 5)
+        {
+            FindObjectOfType<Pot>().KnockOver();
+        }
+
+        if (other.gameObject.name.Contains("Squash"))
+        {
+            if (other.gameObject.name.Contains("Tomato"))
+            {
+                FindObjectOfType<Pot>().TomatosAdded++;
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                FindObjectOfType<Pot>().OnionsAdded++;
+                Destroy(other.gameObject);
+            }
+        }
         if (other.gameObject.name.Contains("KILL"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

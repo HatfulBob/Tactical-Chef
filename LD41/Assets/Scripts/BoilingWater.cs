@@ -8,7 +8,13 @@ public class BoilingWater : MonoBehaviour {
 	void Start () {
         pot = FindObjectOfType<Pot>();
 	}
-
+    private void Update()
+    {
+        if (pot.Broken)
+        {
+            Destroy(gameObject);
+        }
+    }
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name.Contains("Pasta"))

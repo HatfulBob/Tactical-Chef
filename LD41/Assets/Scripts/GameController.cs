@@ -86,7 +86,7 @@ public class GameController : MonoBehaviour
                 break;
 
         }
-        if (currentObjective > objectives.Length)
+        if (pot.KnockedOver || currentObjective > objectives.Length)
         {
             //the game is over
             victoryCamera.gameObject.SetActive(true);
@@ -98,6 +98,8 @@ public class GameController : MonoBehaviour
                 ui[i].text = "";
             }
             ui[0].enabled = true;
+            GetComponent<AudioSource>().Play();
+            enabled = false;
 
         }
 
