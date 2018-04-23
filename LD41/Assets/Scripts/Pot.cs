@@ -16,6 +16,7 @@ public class Pot : MonoBehaviour
     private bool broken = false;
     private bool knockedOver = false;
     private GameController gc;
+    private AudioSource audio;
 
 
     public float Temperature
@@ -110,6 +111,7 @@ public class Pot : MonoBehaviour
     void Start()
     {
         gc = FindObjectOfType<GameController>();
+        audio = GetComponent<AudioSource>();
         timer = maxTimer;
     }
 
@@ -121,6 +123,10 @@ public class Pot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!audio.isPlaying && temperature >= boilingTemp)
+        {
+            audio.Play();
+        }
         if (timer > 0)
         {
             timer -= Time.deltaTime;

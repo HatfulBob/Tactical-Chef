@@ -51,7 +51,9 @@ public class Player : MonoBehaviour
         {
             switch (currentWeapon)
             {
-                case 0: weapons[0].GetComponent<Animation>().Play(); FireShot(); break;
+                case 0: weapons[0].GetComponent<Animation>().Play();
+                    if(!weapons[0].GetComponent<AudioSource>().isPlaying)weapons[0].GetComponent<AudioSource>().Play();
+                    FireShot(); break;
                 case 2: TossPasta(); break;
             }
         }
