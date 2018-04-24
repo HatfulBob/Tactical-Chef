@@ -23,8 +23,8 @@ public class GameController : MonoBehaviour
 
     //pasta boiling timer
     private float timer;
-    private float maxTimer = 2; //* 60f;//2 minutes CHANGE THIS
-
+    private float maxTimer = 20;//20 seconds required for boiling. multiply this value by 60 to make it take minutes
+    
     public int CurrentObjective
     {
         get
